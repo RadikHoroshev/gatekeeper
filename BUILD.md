@@ -40,7 +40,7 @@ hermes skills list | rg 'gate0-eligibility|park-gate-readonly|checkpoint-writer'
 
 ## §4 Demo + submit (Week 3–5)
 
-- [ ] Public GitHub repo with MIT license visible in About (`RadikHoroshev/gatekeeper`) — **local git ready**, `gh repo create` needs human/CLI (Brief E)
+- [x] Public GitHub repo with MIT license visible in About (`https://github.com/RadikHoroshev/gatekeeper`)
 - [x] README highlights Nemotron + Token Factory usage
 - [ ] Record ≤3 min YouTube demo: spray blocked → named GO → Nemotron triage (`docs/DEMO.md`)
 - [ ] Working demo URL (optional: `hermes serve` or static dashboard)
@@ -57,7 +57,7 @@ hermes skills list | rg 'gate0-eligibility|park-gate-readonly|checkpoint-writer'
 | Hermes provider `nebius-token-factory` | **DONE** (default model still ollama-launch/ornith) |
 | Nemotron smoke | **BLOCKED_INFRA** — `NEBIUS_API_KEY` unset (no TF login on this host) |
 | Devpost join + draft | **DONE** — submission 1163649; Submit blocked until GitHub + YouTube |
-| Public GitHub repo | **LOCAL READY** — nested git at `gatekeeper/.git`; GitHub create not pushed |
+| Public GitHub repo | **DONE** — https://github.com/RadikHoroshev/gatekeeper (public, MIT) |
 | Demo video | **PENDING** — see `docs/DEMO.md` |
 
 ## Human / other-machine only

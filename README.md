@@ -4,7 +4,7 @@ Personal AI hunt-discipline assistant — **Nebius × NVIDIA Global AI Hackathon
 
 Refusal is the feature: static GO/PARK gates run locally. **NVIDIA Nemotron** (`nvidia/nemotron-3-super-120b-a12b`) on **[Nebius Token Factory](https://tokenfactory.nebius.com)** wakes only for a named mechanism or a `CANDIDATE_*` event — never for `GO A1 next` spray.
 
-This slice is MIT-licensed. Intended public URL: https://github.com/RadikHoroshev/gatekeeper (create with Brief E if the repo is not live yet).
+This slice is MIT-licensed: https://github.com/RadikHoroshev/gatekeeper
 
 Token Factory is the required runtime; Hermes stays on a local default model until an explicit triage session.
 
@@ -64,7 +64,7 @@ See `BUILD.md` for Devpost registration and Builder Program.
 | Nebius Token Factory runtime | `scripts/smoke_nemotron.py`, `gatekeeper.nemotron` |
 | NVIDIA OSS model (Nemotron) | `nvidia/nemotron-3-super-120b-a12b` default |
 | Personal AI track | Hermes Agent + memory/skills + gate discipline |
-| Public repo + OSS license | MIT LICENSE in this tree; GitHub About after Brief E |
+| Public repo + OSS license | MIT — https://github.com/RadikHoroshev/gatekeeper |
 | Demo video ≤3 min | Record `scripts/demo_candidate.sh` flow |
 
 ## Architecture
