@@ -1,0 +1,3 @@
+# Demo Instant PARK packages (portable; used when ~/bounty KERNEL is absent)
+com.google.android.gms
+com.android.vending

@@ -1,0 +1,11 @@
+# Hermes custom provider — Nebius Token Factory
+# Apply via: hermes model (interactive) or merge into ~/.hermes/config.yaml
+
+provider: custom:nebius-token-factory
+base_url: https://api.tokenfactory.nebius.com/v1/
+api_key_env: NEBIUS_API_KEY
+default_model: nvidia/nemotron-3-super-120b-a12b
+# Cheaper/faster for dev; switch to nvidia/Nemotron-3-Ultra-550b-a55b for demo reasoning
+notes: |
+  Use only for Gatekeeper triage after static gates return ALLOW.
+  Do not point nightly cron or spray workloads here.
