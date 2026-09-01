@@ -6,6 +6,10 @@ Refusal is the feature: static GO/PARK gates run locally. **NVIDIA Nemotron** (`
 
 This slice is MIT-licensed: https://github.com/RadikHoroshev/gatekeeper
 
+[![public-test](https://github.com/RadikHoroshev/gatekeeper/actions/workflows/public-test.yml/badge.svg)](https://github.com/RadikHoroshev/gatekeeper/actions/workflows/public-test.yml)
+
+**Public test build (no secrets):** https://github.com/RadikHoroshev/gatekeeper/actions/workflows/public-test.yml — static `ALLOW_STATIC` + Instant `PARK` + fail-closed `BLOCKED_INFRA`. It does not call Nebius Token Factory and does not use `NEBIUS_API_KEY`.
+
 Token Factory is the required runtime; Hermes stays on a local default model until an explicit triage session.
 
 ## Nebius Token Factory + NVIDIA Nemotron
@@ -47,6 +51,9 @@ python3 scripts/smoke_nemotron.py
 
 # Full demo script
 bash scripts/demo_candidate.sh
+
+# Public no-secret test build (same checks as GitHub Actions)
+bash scripts/public_test.sh
 ```
 
 ## Hermes integration
@@ -65,7 +72,8 @@ See `BUILD.md` for Devpost registration and Builder Program.
 | NVIDIA OSS model (Nemotron) | `nvidia/nemotron-3-super-120b-a12b` default |
 | Personal AI track | Hermes Agent + memory/skills + gate discipline |
 | Public repo + OSS license | MIT — https://github.com/RadikHoroshev/gatekeeper |
-| Demo video ≤3 min | Record `scripts/demo_candidate.sh` flow |
+| Public test build | GitHub Actions `public-test` — `scripts/public_test.sh` (no API key) |
+| Demo video ≤3 min | https://youtu.be/_nyPil6cb_g (`scripts/demo_candidate.sh` flow) |
 
 ## Architecture
 

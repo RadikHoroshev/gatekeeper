@@ -22,7 +22,7 @@ def main() -> int:
     completion = client.chat.completions.create(
         model=MODEL,
         messages=[{"role": "user", "content": "Reply with exactly: Gatekeeper smoke OK"}],
-        max_tokens=32,
+        max_tokens=64,
         temperature=0,
     )
     text = (completion.choices[0].message.content or "").strip()

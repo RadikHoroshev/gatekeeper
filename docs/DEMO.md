@@ -1,6 +1,9 @@
 # Demo video script (≤3 minutes)
 
-Public YouTube is a hard Devpost requirement. Record this flow; do not claim a live Token Factory call unless `scripts/smoke_nemotron.py` already printed PASS.
+Canonical public URL (human `go accept-working-demo` 2026-09-01): https://youtu.be/_nyPil6cb_g  
+Archive slideshow — do not restore to Devpost: https://youtu.be/HSIBGo0bEQc
+
+Public YouTube is a hard Devpost requirement. Record this flow; do not claim a live Token Factory call unless `scripts/smoke_nemotron.py` already printed PASS. The accepted working demo shows fail-closed `BLOCKED_INFRA` when the key was missing. Live smoke later PASSed with a local `.env` key; that is not what `_nyPil6cb_g` shows on camera.
 
 ## Setup (off-camera)
 

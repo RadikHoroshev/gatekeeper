@@ -1,0 +1,34 @@
+name: public-test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-gates:
+    runs-on: ubuntu-latest
+    env:
+      NEBIUS_API_KEY: ""
+      OPENAI_API_KEY: ""
+      PUBLIC_TEST_TRANSCRIPT: public-test-transcript.txt
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run public no-secret test
+        run: bash scripts/public_test.sh
+      - name: Upload transcript
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-test-transcript
+          path: public-test-transcript.txt
+          if-no-files-found: warn

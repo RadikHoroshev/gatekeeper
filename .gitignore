@@ -1,5 +1,6 @@
 .venv/
 .env
+public-test-transcript.txt
 __pycache__/
 *.pyc
 .DS_Store
