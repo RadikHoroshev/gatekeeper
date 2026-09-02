@@ -18,6 +18,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="Skip Tavily and Nemotron even if ALLOW")
     parser.add_argument("--tavily-only", action="store_true", help="After ALLOW, call Tavily then stop (no Nemotron)")
     parser.add_argument("--skip-tavily", action="store_true", help="Do not call Tavily even if the key is set")
+    parser.add_argument(
+        "--tavily-mode",
+        choices=("optional", "required"),
+        default="optional",
+        help="optional: record Tavily status and still call Nemotron; required: any non-grounded result is BLOCKED_INFRA",
+    )
     args = parser.parse_args(argv)
 
     outcome = run_pipeline(
@@ -28,7 +34,7 @@ def main(argv: list[str] | None = None) -> int:
             dry_run=args.dry_run,
             tavily_only=args.tavily_only,
             skip_tavily=args.skip_tavily,
-            require_tavily_grounded=False,
+            tavily_mode=args.tavily_mode,
         )
     )
 

@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
+from typing import Literal
 
 from gatekeeper.gates import check_g0_eligible, check_go_contract
 from gatekeeper.models import Citation, LatencyMs, TriageOutcome
 from gatekeeper.nemotron import TriageRequest, triage_candidate
 from gatekeeper.tavily import TavilyResult, ground_candidate
+
+TavilyMode = Literal["optional", "required"]
 
 
 @dataclass(frozen=True)
@@ -19,7 +22,10 @@ class PipelineOptions:
     dry_run: bool = False
     tavily_only: bool = False
     skip_tavily: bool = False
-    require_tavily_grounded: bool = False
+    tavily_mode: TavilyMode = "optional"
+
+    def grounding_required(self) -> bool:
+        return self.tavily_mode == "required" or self.tavily_only
 
 
 def _citations_from_tavily(result: TavilyResult) -> tuple[Citation, ...]:
@@ -68,6 +74,17 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
     tavily_result = TavilyResult("skipped", "", ())
     tavily_ms = 0
 
+    if options.skip_tavily and options.grounding_required():
+        total = int((time.perf_counter() - started) * 1000)
+        return TriageOutcome(
+            verdict="BLOCKED_INFRA",
+            reason="Tavily required but --skip-tavily was set",
+            gate="GO_CONTRACT",
+            tavily="skipped",
+            nemotron="skipped",
+            latency_ms=LatencyMs(gates=gate_ms, total=total),
+        )
+
     if not options.skip_tavily:
         tavily_started = time.perf_counter()
         tavily_result = ground_candidate(package=options.package, mechanism=options.mechanism)
@@ -76,7 +93,7 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
         if tavily_result.is_grounded:
             extra = tavily_result.as_notes()
             notes = f"{notes}\n\n{extra}".strip() if notes else extra
-        elif options.tavily_only or options.require_tavily_grounded:
+        elif options.grounding_required():
             total = int((time.perf_counter() - started) * 1000)
             return TriageOutcome(
                 verdict="BLOCKED_INFRA",

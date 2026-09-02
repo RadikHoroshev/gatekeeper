@@ -7,7 +7,8 @@ description: After ALLOW, optionally ground a named hypothesis with one Tavily S
 
 Use Tavily only after static gates return ALLOW for a named mechanism.
 
-- No key → skip (`tavily=skipped`) or `scripts/smoke_tavily.py` prints `BLOCKED_INFRA`.
+- No key → `tavily=missing_key`. `scripts/smoke_tavily.py` and `--tavily-only` then print `BLOCKED_INFRA`.
+- Default CLI `--tavily-mode optional` still calls Nemotron after recording that status; `--tavily-mode required` does not.
 - Public GitHub Actions `public-test` must not set `TAVILY_API_KEY`.
 - Do not call Tavily on Instant PARK / spray paths.
 

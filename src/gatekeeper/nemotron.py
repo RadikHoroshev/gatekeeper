@@ -17,6 +17,38 @@ MAX_EVIDENCE_CHARS = 8000
 VERDICT_ALLOW = "ALLOW_PREFLIGHT"
 VERDICT_PARK = "PARK"
 
+_INSTRUCTION_MARKER_RE = re.compile(
+    r"(?is)"
+    r"ignore\s+(?:all\s+)?(?:previous|prior)\s+instructions"
+    r"|ignore\s+(?:the\s+)?policy"
+    r"|<\s*/?\s*(?:system|assistant|user|untrusted_evidence)\b[^>]*>"
+)
+
+
+def scrub_untrusted_text(text: str) -> str:
+    """Strip common instruction-override markers. Hygiene, not a security boundary."""
+    return _INSTRUCTION_MARKER_RE.sub("[filtered]", text)
+
+
+def _escape_evidence(text: str) -> str:
+    cleaned = scrub_untrusted_text(text.replace("\r\n", "\n").strip())
+    if len(cleaned) > MAX_EVIDENCE_CHARS:
+        cleaned = cleaned[: MAX_EVIDENCE_CHARS - 3] + "..."
+    return cleaned.replace("</untrusted_evidence>", "&lt;/untrusted_evidence&gt;")
+
+
+def _format_citations(citations: tuple[Citation, ...]) -> str:
+    if not citations:
+        return "(none)"
+    lines: list[str] = []
+    for i, cite in enumerate(citations, 1):
+        title = scrub_untrusted_text(cite.title)
+        snippet = scrub_untrusted_text(cite.snippet)
+        lines.append(f"[{i}] title={title!r} url={cite.url!r}")
+        if snippet:
+            lines.append(f"    snippet={snippet!r}")
+    return "\n".join(lines)
+
 
 @dataclass
 class TriageRequest:
@@ -55,24 +87,6 @@ def client_from_env() -> ChatClient:
     return OpenAI(base_url=base_url, api_key=api_key)
 
 
-def _escape_evidence(text: str) -> str:
-    cleaned = text.replace("\r\n", "\n").strip()
-    if len(cleaned) > MAX_EVIDENCE_CHARS:
-        cleaned = cleaned[: MAX_EVIDENCE_CHARS - 3] + "..."
-    return cleaned.replace("</untrusted_evidence>", "&lt;/untrusted_evidence&gt;")
-
-
-def _format_citations(citations: tuple[Citation, ...]) -> str:
-    if not citations:
-        return "(none)"
-    lines: list[str] = []
-    for i, cite in enumerate(citations, 1):
-        lines.append(f"[{i}] title={cite.title!r} url={cite.url!r}")
-        if cite.snippet:
-            lines.append(f"    snippet={cite.snippet!r}")
-    return "\n".join(lines)
-
-
 def build_messages(req: TriageRequest) -> list[dict[str, str]]:
     evidence = _escape_evidence(req.static_notes)
     citations_block = _format_citations(req.citations)
@@ -100,23 +114,14 @@ def build_messages(req: TriageRequest) -> list[dict[str, str]]:
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
 
-_JSON_OBJECT_RE = re.compile(r"\{.*\}", re.DOTALL)
-
-
 def _extract_json_object(text: str) -> dict[str, Any]:
     text = text.strip()
     if not text:
         raise ValueError("empty model response")
     try:
         obj = json.loads(text)
-        if isinstance(obj, dict):
-            return obj
-    except json.JSONDecodeError:
-        pass
-    match = _JSON_OBJECT_RE.search(text)
-    if not match:
-        raise ValueError("no JSON object in model response")
-    obj = json.loads(match.group(0))
+    except json.JSONDecodeError as exc:
+        raise ValueError("model response is not a JSON object") from exc
     if not isinstance(obj, dict):
         raise ValueError("parsed JSON is not an object")
     return obj

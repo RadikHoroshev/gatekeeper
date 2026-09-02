@@ -6,8 +6,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-# Refuse live inference even if a runner leaked a key.
-unset NEBIUS_API_KEY OPENAI_API_KEY
+# Refuse live inference / search even if a runner leaked a key.
+unset NEBIUS_API_KEY OPENAI_API_KEY TAVILY_API_KEY
 export PYTHONPATH="${ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
 
 if [[ -x "${ROOT}/.venv/bin/python3" && -z "${CI:-}" ]]; then
@@ -50,6 +50,10 @@ log "python=$PY"
 log "ci=${CI:-local}"
 "$PY" -c "import openai, yaml; print('imports_ok')" | tee -a "$OUT"
 
+log ""
+log "=== offline unit tests ==="
+"$PY" -m unittest discover -s tests -v 2>&1 | tee -a "$OUT"
+
 ALLOW_JSON="$(mktemp)"
 PARK_JSON="$(mktemp)"
 trap 'rm -f "$ALLOW_JSON" "$PARK_JSON"' EXIT
@@ -88,5 +92,5 @@ if [[ "$smoke_rc" -ne 3 ]]; then
 fi
 
 log ""
-log "PASS public-test: ALLOW_STATIC + PARK_INSTANT + BLOCKED_INFRA"
+log "PASS public-test: unittest + ALLOW_STATIC + PARK_INSTANT + BLOCKED_INFRA"
 echo "PASS"
