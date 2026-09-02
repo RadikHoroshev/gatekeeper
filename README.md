@@ -20,6 +20,7 @@ Token Factory is the required runtime; Hermes stays on a local default model unt
 | Base URL | `https://api.tokenfactory.nebius.com/v1/` |
 | Model | `nvidia/nemotron-3-super-120b-a12b` (NVIDIA OSS) |
 | Smoke | `scripts/smoke_nemotron.py` — PASS only with `NEBIUS_API_KEY` |
+| Tavily (optional) | `scripts/smoke_tavily.py` — one Search call after ALLOW; skip without `TAVILY_API_KEY` |
 | Call path | `src/gatekeeper/nemotron.py` after `gates.py` returns `ALLOW` |
 
 Copy `.env.example` → `.env` on a machine where you created the Token Factory key. Do not commit `.env`.
@@ -49,6 +50,9 @@ python3 -m gatekeeper.triage \
 # Nemotron smoke (needs NEBIUS_API_KEY)
 python3 scripts/smoke_nemotron.py
 
+# Tavily smoke (needs TAVILY_API_KEY; fail-closed without it)
+python3 scripts/smoke_tavily.py
+
 # Full demo script
 bash scripts/demo_candidate.sh
 
@@ -73,6 +77,7 @@ See `BUILD.md` for Devpost registration and Builder Program.
 | Personal AI track | Hermes Agent + memory/skills + gate discipline |
 | Public repo + OSS license | MIT — https://github.com/RadikHoroshev/gatekeeper |
 | Public test build | GitHub Actions `public-test` — `scripts/public_test.sh` (no API key) |
+| Best Use of Tavily | Optional: `gatekeeper.tavily` after ALLOW — claim only after local `smoke_tavily.py` PASS |
 | Demo video ≤3 min | https://youtu.be/_nyPil6cb_g (`scripts/demo_candidate.sh` flow) |
 
 ## Architecture
