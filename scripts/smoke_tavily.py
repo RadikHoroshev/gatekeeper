@@ -15,17 +15,22 @@ from gatekeeper.tavily import search  # noqa: E402
 
 
 def main() -> int:
-    if not os.environ.get("TAVILY_API_KEY", "").strip():
+    result = search("NVIDIA Nemotron Nebius Token Factory", max_results=3)
+    print(f"status={result.status}")
+    print(f"query={result.query!r}")
+    print(f"hits={len(result.hits)}")
+    if result.reason:
+        print(f"reason={result.reason}")
+    for hit in result.hits:
+        print(json.dumps({"title": hit.title, "url": hit.url}, ensure_ascii=False))
+    if result.status == "missing_key":
         print("BLOCKED_INFRA: set TAVILY_API_KEY (Builder Program Tavily key; see BUILD.md)")
         return 3
-    grounding = search("NVIDIA Nemotron Nebius Token Factory", max_results=3)
-    print(f"query={grounding.query!r}")
-    print(f"hits={len(grounding.hits)}")
-    for hit in grounding.hits:
-        print(json.dumps({"title": hit.title, "url": hit.url}, ensure_ascii=False))
-    ok = len(grounding.hits) >= 1 and all(h.url.startswith("http") for h in grounding.hits)
-    print("PASS" if ok else "WARN: no usable Tavily hits")
-    return 0 if ok else 4
+    if result.status == "grounded":
+        print("PASS")
+        return 0
+    print("FAIL")
+    return 4 if result.status in {"http_error", "network_error", "invalid_response", "zero_hits"} else 4
 
 
 if __name__ == "__main__":

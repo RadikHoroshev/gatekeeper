@@ -1,0 +1,33 @@
+{
+  "verdict": "ALLOW_PREFLIGHT",
+  "reason": "Named mechanism with grounded citations; no Instant PARK pattern in static notes.",
+  "finding": false,
+  "gate": "GO_CONTRACT",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "provider": "nebius-token-factory",
+  "summary": "Synthetic example for judges — not a live run.",
+  "recommendation": "Proceed only with bounded live preflight after human GO.",
+  "citations": [
+    {
+      "title": "Example security reference",
+      "url": "https://example.com/reference",
+      "snippet": "Illustrative snippet only."
+    }
+  ],
+  "tavily": "grounded",
+  "tavily_hits": 1,
+  "nemotron": "completed",
+  "latency_ms": {
+    "gates": 2,
+    "tavily": 180,
+    "nemotron": 2400,
+    "total": 2582
+  },
+  "usage": {
+    "prompt_tokens": 420,
+    "completion_tokens": 96,
+    "total_tokens": 516
+  },
+  "request_id": "example-request-id",
+  "ts": "2026-09-02T08:00:00+00:00"
+}

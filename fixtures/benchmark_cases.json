@@ -1,0 +1,54 @@
+[
+  {
+    "id": "spray-gms",
+    "package": "com.google.android.gms",
+    "mechanism": "",
+    "dry_run": false,
+    "expected_verdict": "PARK",
+    "expected_park_class": "PARK_INSTANT",
+    "expect_tavily": false,
+    "expect_nemotron": false
+  },
+  {
+    "id": "named-dry-run",
+    "package": "com.example.fake.candidate",
+    "mechanism": "SEND-extra-to-privileged-persist",
+    "dry_run": true,
+    "expected_verdict": "ALLOW_STATIC",
+    "expect_tavily": false,
+    "expect_nemotron": false
+  },
+  {
+    "id": "tavily-zero",
+    "package": "com.example.fake.candidate",
+    "mechanism": "SEND-extra-to-privileged-persist",
+    "dry_run": false,
+    "tavily_only": true,
+    "tavily_status": "zero_hits",
+    "expected_verdict": "BLOCKED_INFRA",
+    "expect_tavily": true,
+    "expect_nemotron": false
+  },
+  {
+    "id": "tavily-grounded",
+    "package": "com.example.fake.candidate",
+    "mechanism": "SEND-extra-to-privileged-persist",
+    "dry_run": false,
+    "tavily_only": true,
+    "tavily_status": "grounded",
+    "expected_verdict": "TAVILY_GROUNDED",
+    "expect_tavily": true,
+    "expect_nemotron": false
+  },
+  {
+    "id": "nemotron-park",
+    "package": "com.example.fake.candidate",
+    "mechanism": "SEND-extra-to-privileged-persist",
+    "dry_run": false,
+    "tavily_status": "grounded",
+    "nemotron_verdict": "PARK",
+    "expected_verdict": "PARK",
+    "expect_tavily": true,
+    "expect_nemotron": true
+  }
+]
