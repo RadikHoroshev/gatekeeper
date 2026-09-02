@@ -44,6 +44,7 @@ def main() -> int:
     gate_latencies: list[int] = []
     false_allow = 0
     false_park = 0
+    mismatches = 0
     totals = {
         "total_candidates": len(cases),
         "parked_locally": 0,
@@ -90,6 +91,7 @@ def main() -> int:
                 totals["prevented_model_calls"] += 1
 
         if outcome.verdict != case["expected_verdict"]:
+            mismatches += 1
             if case["expected_verdict"] in {"ALLOW_STATIC", "ALLOW_PREFLIGHT", "TAVILY_GROUNDED"} and outcome.verdict == "PARK":
                 false_park += 1
             elif case["expected_verdict"] == "PARK" and outcome.verdict != "PARK":
@@ -105,7 +107,7 @@ def main() -> int:
         else (gate_latencies[0] if gate_latencies else 0),
     }
     print(json.dumps(report, indent=2))
-    return 0
+    return 1 if mismatches else 0
 
 
 if __name__ == "__main__":

@@ -92,5 +92,9 @@ if [[ "$smoke_rc" -ne 3 ]]; then
 fi
 
 log ""
-log "PASS public-test: unittest + ALLOW_STATIC + PARK_INSTANT + BLOCKED_INFRA"
+log "=== offline benchmark ==="
+"$PY" "${ROOT}/scripts/benchmark_offline.py" 2>&1 | tee -a "$OUT"
+
+log ""
+log "PASS public-test: unittest + ALLOW_STATIC + PARK_INSTANT + BLOCKED_INFRA + benchmark"
 echo "PASS"
