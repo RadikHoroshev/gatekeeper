@@ -168,7 +168,18 @@ def triage_candidate(req: TriageRequest, *, client: ChatClient | None = None) ->
         max_tokens=512,
     )
     latency_ms = int((time.perf_counter() - started) * 1000)
-    text = completion.choices[0].message.content or ""
+    choices = getattr(completion, "choices", None)
+    if not choices:
+        raise ValueError("completion has no choices")
+    try:
+        choice = choices[0]
+    except (IndexError, KeyError, TypeError) as exc:
+        raise ValueError("completion has no usable choice") from exc
+    message = getattr(choice, "message", None)
+    content = getattr(message, "content", None)
+    if not isinstance(content, str):
+        raise ValueError("completion choice has no text content")
+    text = content
     parsed = _parse_model_payload(_extract_json_object(text))
     return NemotronResult(
         verdict=parsed.verdict,

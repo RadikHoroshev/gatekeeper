@@ -378,6 +378,102 @@ class PipelineTests(unittest.TestCase):
         self.assertNotIn("secret-never-log", text)
         self.assertEqual(outcome.verdict, "ALLOW_PREFLIGHT")
 
+    def test_r2_unknown_package_empty_mechanism_is_block(self):
+        outcome = run_pipeline(PipelineOptions(package="com.unknown.app", mechanism=""))
+        # Gate may return BLOCK for no mechanism or exhausted_idle; must not collapse to PARK.
+        self.assertEqual(outcome.verdict, "BLOCK")
+        self.assertNotEqual(outcome.verdict, "PARK")
+        self.assertEqual(outcome.nemotron, "skipped")
+        self.assertTrue(
+            ("no named mechanism" in outcome.reason) or ("exhausted_idle" in outcome.reason),
+            msg=outcome.reason,
+        )
+
+    def test_r2_instant_park_still_park(self):
+        outcome = run_pipeline(PipelineOptions(package="com.google.android.gms", mechanism=""))
+        self.assertEqual(outcome.verdict, "PARK")
+        self.assertEqual(outcome.park_class, "PARK_INSTANT")
+
+    def test_r1_connection_error_is_blocked_infra(self):
+        with mock.patch(
+            "gatekeeper.pipeline.ground_candidate",
+            return_value=TavilyResult("skipped", "", ()),
+        ), mock.patch(
+            "gatekeeper.pipeline.triage_candidate",
+            side_effect=ConnectionError("simulated provider disconnect"),
+        ):
+            outcome = run_pipeline(
+                PipelineOptions(
+                    package="com.example.fake.candidate",
+                    mechanism="SEND-extra-to-privileged-persist",
+                    skip_tavily=True,
+                )
+            )
+        self.assertEqual(outcome.verdict, "BLOCKED_INFRA")
+        self.assertEqual(outcome.nemotron, "blocked")
+        self.assertEqual(outcome.reason, "Nemotron provider failure")
+        self.assertNotIn("simulated provider disconnect", outcome.reason)
+
+    def test_r1_empty_choices_is_blocked_infra(self):
+        class FakeClient:
+            class Chat:
+                class Completions:
+                    @staticmethod
+                    def create(**kwargs):
+                        class Completion:
+                            choices = []
+                            usage = None
+                            id = "req-empty"
+
+                        return Completion()
+
+                completions = Completions()
+
+            chat = Chat()
+
+        with mock.patch(
+            "gatekeeper.pipeline.ground_candidate",
+            return_value=TavilyResult("skipped", "", ()),
+        ), mock.patch(
+            "gatekeeper.pipeline.triage_candidate",
+            side_effect=lambda req: triage_candidate(req, client=FakeClient()),
+        ):
+            outcome = run_pipeline(
+                PipelineOptions(
+                    package="com.example.fake.candidate",
+                    mechanism="SEND-extra-to-privileged-persist",
+                    skip_tavily=True,
+                )
+            )
+        self.assertEqual(outcome.verdict, "BLOCKED_INFRA")
+        self.assertEqual(outcome.nemotron, "invalid_response")
+        self.assertIn("no choices", outcome.reason)
+
+    def test_r1_attribute_error_is_blocked_infra(self):
+        with mock.patch(
+            "gatekeeper.pipeline.ground_candidate",
+            return_value=TavilyResult("skipped", "", ()),
+        ), mock.patch(
+            "gatekeeper.pipeline.triage_candidate",
+            side_effect=AttributeError("choices"),
+        ):
+            outcome = run_pipeline(
+                PipelineOptions(
+                    package="com.example.fake.candidate",
+                    mechanism="SEND-extra-to-privileged-persist",
+                    skip_tavily=True,
+                )
+            )
+        self.assertEqual(outcome.verdict, "BLOCKED_INFRA")
+        self.assertEqual(outcome.nemotron, "blocked")
+        self.assertEqual(outcome.reason, "Nemotron provider failure")
+
+    def test_r2_cli_block_exit_code(self):
+        from gatekeeper.triage import main as triage_main
+
+        rc = triage_main(["--package", "com.unknown.app", "--mechanism", ""])
+        self.assertEqual(rc, 2)
+
 
 if __name__ == "__main__":
     unittest.main()

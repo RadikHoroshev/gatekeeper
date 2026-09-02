@@ -14,6 +14,32 @@ from gatekeeper.tavily import TavilyResult, ground_candidate
 TavilyMode = Literal["optional", "required"]
 
 
+def _provider_failure_reason(exc: Exception) -> str:
+    """Secret-free reason for any failure during a Nemotron attempt."""
+    status_code = getattr(exc, "status_code", None)
+    if isinstance(status_code, int):
+        return f"Nemotron provider HTTP {status_code}"
+    if isinstance(exc, RuntimeError) and "NEBIUS_API_KEY not set" in str(exc):
+        return "NEBIUS_API_KEY not set"
+    # Transport / shape failures: one stable public reason (never echo exc text).
+    if isinstance(
+        exc,
+        (TimeoutError, OSError, IndexError, AttributeError, TypeError, KeyError),
+    ):
+        return "Nemotron provider failure"
+    error_type = type(exc)
+    if error_type.__module__.split(".", 1)[0] in {"openai", "httpx"} or error_type.__name__ in {
+        "APIError",
+        "APIConnectionError",
+        "APIStatusError",
+        "APITimeoutError",
+        "HTTPError",
+        "TimeoutException",
+    }:
+        return "Nemotron provider failure"
+    return "Nemotron provider failure"
+
+
 @dataclass(frozen=True)
 class PipelineOptions:
     package: str
@@ -51,8 +77,9 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
     gate = check_go_contract(package=options.package, mechanism=options.mechanism)
     gate_ms = int((time.perf_counter() - gate_started) * 1000)
     if gate.verdict != "ALLOW":
+        # Preserve PARK vs BLOCK from the gate (do not collapse BLOCK → PARK).
         return TriageOutcome(
-            verdict="PARK",
+            verdict=gate.verdict,
             reason=gate.reason,
             gate="GO_CONTRACT",
             park_class=gate.park_class,
@@ -139,19 +166,6 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
                 citations=citations,
             )
         )
-    except RuntimeError as exc:
-        total = int((time.perf_counter() - started) * 1000)
-        nemotron_ms = int((time.perf_counter() - nemotron_started) * 1000)
-        return TriageOutcome(
-            verdict="BLOCKED_INFRA",
-            reason=str(exc),
-            gate="GO_CONTRACT",
-            tavily=tavily_result.status,
-            tavily_hits=len(tavily_result.hits),
-            citations=citations,
-            nemotron="blocked",
-            latency_ms=LatencyMs(gates=gate_ms, tavily=tavily_ms, nemotron=nemotron_ms, total=total),
-        )
     except ValueError as exc:
         total = int((time.perf_counter() - started) * 1000)
         nemotron_ms = int((time.perf_counter() - nemotron_started) * 1000)
@@ -163,6 +177,20 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
             tavily_hits=len(tavily_result.hits),
             citations=citations,
             nemotron="invalid_response",
+            latency_ms=LatencyMs(gates=gate_ms, tavily=tavily_ms, nemotron=nemotron_ms, total=total),
+        )
+    except Exception as exc:
+        # Fail-closed for transport/SDK/shape errors (ConnectionError, empty choices, etc.).
+        total = int((time.perf_counter() - started) * 1000)
+        nemotron_ms = int((time.perf_counter() - nemotron_started) * 1000)
+        return TriageOutcome(
+            verdict="BLOCKED_INFRA",
+            reason=_provider_failure_reason(exc),
+            gate="GO_CONTRACT",
+            tavily=tavily_result.status,
+            tavily_hits=len(tavily_result.hits),
+            citations=citations,
+            nemotron="blocked",
             latency_ms=LatencyMs(gates=gate_ms, tavily=tavily_ms, nemotron=nemotron_ms, total=total),
         )
 
