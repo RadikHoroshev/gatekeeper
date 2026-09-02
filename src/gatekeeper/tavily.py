@@ -12,6 +12,7 @@ import urllib.error
 import urllib.request
 from dataclasses import dataclass
 from typing import Callable, Literal
+from urllib.parse import urlsplit
 
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
 MAX_TITLE_LEN = 200
@@ -84,7 +85,17 @@ def _sanitize_hit(item: dict) -> TavilyHit | None:
     if not isinstance(item, dict):
         return None
     url = _sanitize_text(item.get("url"), limit=MAX_URL_LEN)
-    if not url.startswith("http"):
+    try:
+        parsed = urlsplit(url)
+        hostname = parsed.hostname
+    except ValueError:
+        return None
+    if (
+        parsed.scheme.lower() not in {"http", "https"}
+        or not hostname
+        or parsed.username is not None
+        or parsed.password is not None
+    ):
         return None
     title = _sanitize_text(item.get("title"), limit=MAX_TITLE_LEN)
     snippet = _sanitize_text(item.get("content") or item.get("snippet"), limit=MAX_SNIPPET_LEN)

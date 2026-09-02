@@ -10,6 +10,7 @@ from openai import OpenAI
 
 BASE_URL = os.environ.get("NEBIUS_BASE_URL", "https://api.tokenfactory.nebius.com/v1/")
 MODEL = os.environ.get("NEMOTRON_MODEL", "nvidia/nemotron-3-super-120b-a12b")
+EXPECTED = "Gatekeeper smoke OK"
 
 
 def main() -> int:
@@ -21,15 +22,18 @@ def main() -> int:
     client = OpenAI(base_url=BASE_URL, api_key=api_key)
     completion = client.chat.completions.create(
         model=MODEL,
-        messages=[{"role": "user", "content": "Reply with exactly: Gatekeeper smoke OK"}],
+        messages=[{"role": "user", "content": f"Reply with exactly: {EXPECTED}"}],
         max_tokens=64,
         temperature=0,
     )
     text = (completion.choices[0].message.content or "").strip()
     print(f"model={MODEL}")
     print(f"response={text!r}")
-    print("PASS" if "Gatekeeper" in text or "OK" in text else "WARN: unexpected response")
-    return 0
+    if text == EXPECTED:
+        print("PASS")
+        return 0
+    print("FAIL: unexpected response")
+    return 1
 
 
 if __name__ == "__main__":

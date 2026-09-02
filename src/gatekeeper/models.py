@@ -56,7 +56,7 @@ class TriageOutcome:
     gate: str | None = None
     park_class: str | None = None
     model: str | None = None
-    provider: str = "nebius-token-factory"
+    provider: str | None = None
     summary: str | None = None
     recommendation: str | None = None
     citations: tuple[Citation, ...] = ()

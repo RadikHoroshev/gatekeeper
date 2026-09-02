@@ -12,6 +12,7 @@ from gatekeeper.nemotron import TriageRequest, triage_candidate
 from gatekeeper.tavily import TavilyResult, ground_candidate
 
 TavilyMode = Literal["optional", "required"]
+NEMOTRON_PROVIDER = "nebius-token-factory"
 
 
 def _provider_failure_reason(exc: Exception) -> str:
@@ -177,6 +178,7 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
             tavily_hits=len(tavily_result.hits),
             citations=citations,
             nemotron="invalid_response",
+            provider=NEMOTRON_PROVIDER,
             latency_ms=LatencyMs(gates=gate_ms, tavily=tavily_ms, nemotron=nemotron_ms, total=total),
         )
     except Exception as exc:
@@ -191,6 +193,7 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
             tavily_hits=len(tavily_result.hits),
             citations=citations,
             nemotron="blocked",
+            provider=NEMOTRON_PROVIDER,
             latency_ms=LatencyMs(gates=gate_ms, tavily=tavily_ms, nemotron=nemotron_ms, total=total),
         )
 
@@ -203,6 +206,7 @@ def run_pipeline(options: PipelineOptions) -> TriageOutcome:
         recommendation=model_result.reason,
         gate="GO_CONTRACT",
         model=model_result.model,
+        provider=NEMOTRON_PROVIDER,
         citations=citations,
         tavily=tavily_result.status,
         tavily_hits=len(tavily_result.hits),
