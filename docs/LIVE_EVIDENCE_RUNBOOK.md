@@ -1,16 +1,18 @@
 # Live evidence runbook — Gatekeeper
 
-**Runtime smoke (immutable path; still in tip):** `evidence/live/20260903T075935Z/` — citation relevance **FAIL** (0/3 name collision).
+**Runtime smoke:** `evidence/live/20260903T075935Z/` — citation relevance **FAIL** (0/3 name collision).
+**First live pair (in git):** `evidence/live/20260903T070111Z/` — same collision class **FAIL**.
 **Citation-relevance live (`GO_TAVILY_RELEVANCE`):** `evidence/live/20260903T102852Z/` — **PASS** (3/3 WebView / `addJavascriptInterface`).
+**Reviewer packet:** `docs/REVIEWER_PACKET.md`
 **Review:** `evidence/reviews/tavily-relevance-20260903.md`
 **Do not** record/publish video without `GO_DEMO_RECORD` / `GO_DEMO_PUBLISH`.
 
-## Frozen git facts
+## Frozen git facts (audit snapshot)
 
 | Ref | Value |
 |---|---|
-| HEAD / origin/main | `bcbbbc1b642e69a420d03c347202027bc5f58977` |
-| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 |
+| HEAD / origin/main | `52d282158d894f89d3766a2658107d6416a66523` |
+| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33781188328 |
 
 ## Confirmed vs open
 
@@ -44,7 +46,7 @@ bash scripts/public_test.sh
 Directory: `evidence/live/20260903T075935Z/`
 Treat as **runtime / fail-closed proof**, not Tavily quality.
 
-Older local leftover `evidence/live/20260903T070111Z/` is **not** for commit.
+`evidence/live/20260903T070111Z/` is in git as the first collision-FAIL pair (commit `52d2821`). Treat as **error evidence**, not Tavily quality.
 
 Independent review of citation fail: `evidence/reviews/runtime-proof-20260903.md`.
 

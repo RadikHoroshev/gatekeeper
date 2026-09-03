@@ -1,8 +1,8 @@
 # Judging evidence matrix — Gatekeeper
 
-**As of:** 2026-09-03 (Phase B Tavily relevance)
-**Public tip:** [`bcbbbc1`](https://github.com/RadikHoroshev/gatekeeper/commit/bcbbbc1b642e69a420d03c347202027bc5f58977)
-**CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 (**SUCCESS**)
+**As of:** 2026-09-03 (reviewer packet)
+**Audited tip:** [`52d2821`](https://github.com/RadikHoroshev/gatekeeper/commit/52d282158d894f89d3766a2658107d6416a66523)
+**CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33781188328 (**SUCCESS**)
 **Runtime smoke:** `evidence/live/20260903T075935Z/`
 **Citation-relevance live:** `evidence/live/20260903T102852Z/`
 **Canonical video:** https://youtu.be/_nyPil6cb_g (gates / `BLOCKED_INFRA` — **not** live Nemotron)

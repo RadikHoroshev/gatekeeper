@@ -32,14 +32,15 @@ No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKE
 | Artifact | URL |
 |---|---|
 | Source | https://github.com/RadikHoroshev/gatekeeper |
-| Public tip SHA | [`bcbbbc1`](https://github.com/RadikHoroshev/gatekeeper/commit/bcbbbc1b642e69a420d03c347202027bc5f58977) |
-| Public tip CI (SUCCESS) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 |
-| Live golden-path JSON (runtime plumbing) | [`evidence/live/20260903T075935Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/bcbbbc1b642e69a420d03c347202027bc5f58977/evidence/live/20260903T075935Z/golden_path.json) |
-| Live citation-relevance JSON (WebView) | `evidence/live/20260903T102852Z/golden_path.json` |
+| Audited tip SHA | [`52d2821`](https://github.com/RadikHoroshev/gatekeeper/commit/52d282158d894f89d3766a2658107d6416a66523) |
+| Audited tip CI (SUCCESS) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33781188328 |
+| Reviewer packet (FAIL + PASS proofs) | [`docs/REVIEWER_PACKET.md`](docs/REVIEWER_PACKET.md) |
+| Collision FAIL JSON | [`evidence/live/20260903T075935Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/52d282158d894f89d3766a2658107d6416a66523/evidence/live/20260903T075935Z/golden_path.json) |
+| Relevance PASS JSON (WebView) | [`evidence/live/20260903T102852Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/52d282158d894f89d3766a2658107d6416a66523/evidence/live/20260903T102852Z/golden_path.json) |
 | Relevance review | `evidence/reviews/tavily-relevance-20260903.md` |
 | Demo video (gates / `BLOCKED_INFRA` only) | https://youtu.be/_nyPil6cb_g |
 
-**How to read the live JSON:** `20260903T075935Z` proves **runtime plumbing** (Tavily hits + Token Factory Nemotron). Its citations collided on the word “Gatekeeper” (AOSP/GKE) — **0/3** mechanism-relevant. `20260903T102852Z` is the **citation-relevance** run: package `android.webkit.WebView` / `addJavascriptInterface` — **3/3** supporting, including `developer.android.com` (no query rewrite).
+**How to read the live JSON:** `075935Z` / `070111Z` prove **runtime plumbing** and **document a real Tavily error**: citations collided on the word “Gatekeeper” (AOSP/GKE) — **0/3** mechanism-relevant. `102852Z` is the **citation-relevance** correction: `android.webkit.WebView` / `addJavascriptInterface` — **3/3** supporting, including `developer.android.com`. Full falsification table: `docs/REVIEWER_PACKET.md`.
 
 ## 6. Track recommendation
 
@@ -57,11 +58,12 @@ The published video shows `BLOCKED_INFRA` when keys are unset. It demonstrates f
 | NVIDIA Nemotron | model=`nvidia/nemotron-3-super-120b-a12b` in live JSON |
 | Best Apps and Agents fit | refuse-first agent workflow + CI + live JSON |
 | Personal AI | **not claimed** (memory/always-on missing) |
-| Working test path | Actions run 33744965150 + `scripts/public_test.sh` |
+| Working test path | Actions run 33781188328 + `scripts/public_test.sh` |
 | Best Use of Tavily ($3k) | functional call + **citation relevance PASS** on WebView fixture (`20260903T102852Z`, 3/3) |
 
 ## Next files
 
+- `docs/REVIEWER_PACKET.md` — claim table, collision FAIL URLs, hash + request_id
 - `docs/JUDGING_EVIDENCE_MATRIX.md` — rubric status table
 - `docs/TRACK_DECISION.md` — track choice for humans
 - `docs/LIVE_EVIDENCE_RUNBOOK.md` — how live evidence was produced
