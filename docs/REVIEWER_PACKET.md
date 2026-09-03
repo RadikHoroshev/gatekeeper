@@ -104,14 +104,15 @@ Same shape on smoke JSON (`075935Z` usage `1413`).
 oEmbed title: “Gatekeeper working demo — Hermes + NVIDIA Nemotron on Nebius Token Factory”.
 **On-camera behavior:** keys unset → `BLOCKED_INFRA`. That is fail-closed, not a live Super 120B reply. Live proof is the JSON in §2–§5.
 
-## 7. Devpost (portal, 2026-09-03T16:55Z scrape)
+## 7. Devpost (portal, 2026-09-03T17:12Z scrape after `GO_DEVPOST_UPDATE`)
 
 | Check | Result |
 |---|---|
 | Embed `_nyPil6cb_g` | present |
-| Working demo / test-build | Actions `33746517076` (SUCCESS, docs-pin commit `da6be81`) |
-| Writeup | Best Apps / Refuse-first / `JUDGE_START_HERE` |
-| Latest git tip CI `33781188328` | **not** yet on the demo URL (docs lag). Repo URL is still GitHub main |
+| Working demo / test-build | Actions **`33781962888`** (SUCCESS, tip `45eacef` reviewer packet) |
+| Writeup | Best Apps / Refuse-first / `JUDGE_START_HERE` / collision FAIL + WebView PASS |
+| `docs/REVIEWER_PACKET.md` linked | present on public page |
+| Old demo URL `33746517076` | **removed** |
 | Submit | already Submitted; `submitted_at` 2026-09-01 — do not click Submit again |
 
 ## 8. Reviewer FAQ (pre-answered)
