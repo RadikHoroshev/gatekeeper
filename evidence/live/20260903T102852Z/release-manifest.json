@@ -1,0 +1,106 @@
+{
+  "artifact_type": "citation_relevance",
+  "source_git_sha": "7887a8b3c576a14f25c2953e290ab03d7b848763",
+  "git_sha": "7887a8b3c576a14f25c2953e290ab03d7b848763",
+  "utc_timestamp": "2026-09-03T10:29:44Z",
+  "command_argv": [
+    ".venv/bin/python3",
+    "-m",
+    "gatekeeper.triage",
+    "--package",
+    "android.webkit.WebView",
+    "--mechanism",
+    "addJavascriptInterface with untrusted web content",
+    "--static-notes",
+    "Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding; not tied to any unpublished bounty target.",
+    "--tavily-mode",
+    "required"
+  ],
+  "command": ".venv/bin/python3 -m gatekeeper.triage --package android.webkit.WebView --mechanism addJavascriptInterface with untrusted web content --static-notes Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding; not tied to any unpublished bounty target. --tavily-mode required",
+  "run_count": 2,
+  "runs": [
+    {
+      "label": "golden_path",
+      "verdict": "PARK",
+      "provider": "nebius-token-factory",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tavily": "grounded",
+      "tavily_hits": 3,
+      "citation_count": 3,
+      "usage": {
+        "prompt_tokens": 1151,
+        "completion_tokens": 351,
+        "total_tokens": 1502
+      },
+      "request_id": "chatcmpl-26ec586deabb43aebcc76c5b002ba9ce",
+      "latency_ms": {
+        "gates": 0,
+        "tavily": 3071,
+        "nemotron": 1980,
+        "total": 5354
+      },
+      "exit_code": 0,
+      "finding": false,
+      "nemotron": "completed"
+    },
+    {
+      "label": "golden_path_repeat",
+      "verdict": "PARK",
+      "provider": "nebius-token-factory",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tavily": "grounded",
+      "tavily_hits": 3,
+      "citation_count": 3,
+      "usage": {
+        "prompt_tokens": 1151,
+        "completion_tokens": 347,
+        "total_tokens": 1498
+      },
+      "request_id": "chatcmpl-7e65c795430e49fb8f925879090a1a14",
+      "latency_ms": {
+        "gates": 0,
+        "tavily": 478,
+        "nemotron": 1776,
+        "total": 2540
+      },
+      "exit_code": 0,
+      "finding": false,
+      "nemotron": "completed"
+    }
+  ],
+  "exit_code": 0,
+  "provider": "nebius-token-factory",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "request_id": "chatcmpl-26ec586deabb43aebcc76c5b002ba9ce",
+  "usage": {
+    "prompt_tokens": 1151,
+    "completion_tokens": 351,
+    "total_tokens": 1502
+  },
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 3071,
+    "nemotron": 1980,
+    "total": 5354
+  },
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "verdict": "PARK",
+  "citation_relevance": "PASSED_MANUAL_REVIEW",
+  "evidence_sha256": {
+    "golden_path.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path.json": "e0289b23da176b1de81de196c6aa39fea58bbba65f5180e7eb313ecad7215f7e",
+    "golden_path.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "golden_path_repeat.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path_repeat.json": "a9341dc82d12396b9029cb34b4596a4fb6365f26fc09cba215410f7c429e2d13",
+    "golden_path_repeat.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "ci_url": "https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786",
+  "demo_url": "https://youtu.be/_nyPil6cb_g",
+  "redactions": [],
+  "limitations": [
+    "demo_url is fail-closed video (_nyPil6cb_g), not this live relevance run",
+    "prior smoke evidence/live/20260903T075935Z remains runtime-only (Gatekeeper name collision); this run is citation-relevance"
+  ],
+  "metric_scope_note": "Runtime smoke proves plumbing and fail-closed behavior. Citation relevance and model/vulnerability accuracy are separate claims."
+}

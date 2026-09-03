@@ -1,6 +1,9 @@
 {
   "id": "public-webview-addjavascriptinterface",
-  "status": "PREPARED_NOT_EXECUTED",
+  "status": "EXECUTED_PASS",
+  "executed_at": "2026-09-03T10:28:52Z",
+  "evidence_dir": "evidence/live/20260903T102852Z/",
+  "review": "evidence/reviews/tavily-relevance-20260903.md",
   "synthetic": true,
   "finding": false,
   "confidential_bounty_data": false,
@@ -40,13 +43,22 @@
     "reject_generic_gatekeeper_or_kubernetes": true,
     "notes": "A citation directly supports the mechanism if it discusses WebView and/or addJavascriptInterface security risks or mitigations. Generic Gatekeeper/OPA/Kubernetes policy pages fail."
   },
+  "relevance_result": {
+    "supporting": 3,
+    "of_top_n": 3,
+    "authoritative_hit": true,
+    "unique_domains": 3,
+    "gatekeeper_k8s_collision": false,
+    "query_tweak_applied": false,
+    "verdict": "PASS"
+  },
   "current_query_builder": {
     "function": "gatekeeper.tavily.ground_candidate",
     "template": "{package} {mechanism} android security named hypothesis",
     "example_query": "android.webkit.WebView addJavascriptInterface with untrusted web content android security named hypothesis",
     "plausible_without_rewrite": true,
     "proposed_correction": null,
-    "note": "Current construction is plausible for developer.android.com WebView / addJavascriptInterface docs. Do not expand into a Tavily rewrite in this task."
+    "note": "Unchanged builder; GO_TAVILY_RELEVANCE run passed without rewrite."
   },
-  "execute_only_with_go": "GO_RUNTIME_PROOF_RELEVANCE"
+  "execute_only_with_go": "GO_TAVILY_RELEVANCE"
 }

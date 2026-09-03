@@ -25,33 +25,44 @@ cd gatekeeper
 bash scripts/public_test.sh
 ```
 
-No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKED_INFRA`, and offline benchmark `false_allow=0` / `false_park=0`.
+No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKED_INFRA`, and offline routing benchmark.
 
-## 5. Public links
+## 5. Public links (tip SHA)
 
 | Artifact | URL |
 |---|---|
 | Source | https://github.com/RadikHoroshev/gatekeeper |
-| Public test workflow (latest runs) | https://github.com/RadikHoroshev/gatekeeper/actions/workflows/public-test.yml |
-| Public tip CI (`92a491f`) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243 |
-| Demo video (gates / `BLOCKED_INFRA`, not live Nemotron) | https://youtu.be/_nyPil6cb_g |
+| Public tip SHA | [`7887a8b`](https://github.com/RadikHoroshev/gatekeeper/commit/7887a8b3c576a14f25c2953e290ab03d7b848763) |
+| Public tip CI (SUCCESS) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786 |
+| Live golden-path JSON (runtime plumbing) | [`evidence/live/20260903T075935Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/7887a8b3c576a14f25c2953e290ab03d7b848763/evidence/live/20260903T075935Z/golden_path.json) |
+| Live citation-relevance JSON (WebView) | `evidence/live/20260903T102852Z/golden_path.json` |
+| Relevance review | `evidence/reviews/tavily-relevance-20260903.md` |
+| Demo video (gates / `BLOCKED_INFRA` only) | https://youtu.be/_nyPil6cb_g |
 
-## 6. Honest limitation
+**How to read the live JSON:** `20260903T075935Z` proves **runtime plumbing** (Tavily hits + Token Factory Nemotron). Its citations collided on the word “Gatekeeper” (AOSP/GKE) — **0/3** mechanism-relevant. `20260903T102852Z` is the **citation-relevance** run: package `android.webkit.WebView` / `addJavascriptInterface` — **3/3** supporting, including `developer.android.com` (no query rewrite).
 
-The published video shows `BLOCKED_INFRA` when `NEBIUS_API_KEY` is unset. **Live Nemotron smoke PASS happened after recording** — public record: `evidence/nemotron-smoke.md`. The video demonstrates discipline, not a live model response on camera.
+## 6. Track recommendation
 
-## 7. Judging criteria map
+Prefer **Best Apps and Agents**. Personal AI (persistent memory + always-on) is **not demonstrated**. See `docs/TRACK_DECISION.md`. Devpost track is unchanged until a separate `GO_DEVPOST_UPDATE`.
+
+## 7. Honest limitation (video)
+
+The published video shows `BLOCKED_INFRA` when keys are unset. It demonstrates fail-closed discipline, **not** a live Nemotron response on camera. Live Token Factory evidence is the JSON above.
+
+## 8. Judging criteria map
 
 | Criterion | Evidence |
 |---|---|
-| Use of Nebius Token Factory / AI Cloud | `src/gatekeeper/nemotron.py`, `scripts/smoke_nemotron.py`, `evidence/nemotron-smoke.md` |
-| NVIDIA open-source Nemotron | default model `nvidia/nemotron-3-super-120b-a12b` |
-| Personal AI track fit | Hermes skills + gate discipline; memory/always-on out of scope for this slice |
-| Working test path | GitHub Actions `public-test` + `scripts/public_test.sh` (no hosted endpoint) |
-| Best Use of Tavily (optional $3k) | `src/gatekeeper/tavily.py`, `skills/tavily-ground`, fail-closed without key |
+| Nebius Token Factory / AI Cloud | live JSON provider=`nebius-token-factory`; `src/gatekeeper/nemotron.py` |
+| NVIDIA Nemotron | model=`nvidia/nemotron-3-super-120b-a12b` in live JSON |
+| Best Apps and Agents fit | refuse-first agent workflow + CI + live JSON |
+| Personal AI | **not claimed** (memory/always-on missing) |
+| Working test path | Actions run 33732710786 + `scripts/public_test.sh` |
+| Best Use of Tavily ($3k) | functional call + **citation relevance PASS** on WebView fixture (`20260903T102852Z`, 3/3) |
 
 ## Next files
 
-- `evidence/runtime-proof.example.json` — structured result shape
-- `fixtures/benchmark_cases.json` + `scripts/benchmark_offline.py` — offline metrics (`NOT_MEASURED` is not a percent)
-- `docs/JUDGE_DEMO_PLAN.md` — 90–120s live demo script (not recorded here)
+- `docs/JUDGING_EVIDENCE_MATRIX.md` — rubric status table
+- `docs/TRACK_DECISION.md` — track choice for humans
+- `docs/LIVE_EVIDENCE_RUNBOOK.md` — how live evidence was produced
+- `fixtures/benchmark_cases.json` — offline routing metrics only

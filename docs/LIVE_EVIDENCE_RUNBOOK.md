@@ -1,15 +1,16 @@
 # Live evidence runbook — Gatekeeper
 
-**Live smoke status:** executed under `GO_RUNTIME_PROOF` → `evidence/live/20260903T070111Z/` (**immutable**).  
-**Citation relevance:** current smoke **FAIL** (0/3). Supplemental run requires `GO_RUNTIME_PROOF_RELEVANCE`.  
+**Runtime smoke (in tip `7887a8b`):** `evidence/live/20260903T075935Z/` — citation relevance **FAIL** (0/3 name collision).
+**Citation-relevance live (`GO_TAVILY_RELEVANCE`):** `evidence/live/20260903T102852Z/` — **PASS** (3/3 WebView / `addJavascriptInterface`).
+**Review:** `evidence/reviews/tavily-relevance-20260903.md`
 **Do not** record/publish video without `GO_DEMO_RECORD` / `GO_DEMO_PUBLISH`.
 
-## Frozen git facts
+## Frozen git facts (parent at relevance run)
 
-| Ref | SHA |
+| Ref | Value |
 |---|---|
-| HEAD / origin/main | `92a491f54a991952d932b0c14e987077be0f8913` |
-| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243 |
+| HEAD / origin/main (at run) | `7887a8b3c576a14f25c2953e290ab03d7b848763` |
+| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786 |
 
 ## Confirmed vs open
 
@@ -19,8 +20,8 @@
 | NVIDIA Nemotron runtime | **CONFIRMED** |
 | Repeatability (2 calls) | **CONFIRMED** |
 | Tavily functional runtime call | **CONFIRMED** |
-| Tavily citation relevance (smoke) | **PARTIAL / FAIL** |
-| Best Use of Tavily evidence | **OPEN** until relevance run passes |
+| Tavily citation relevance (WebView fixture) | **CONFIRMED** (3/3) |
+| Best Use of Tavily evidence | **CONFIRMED** for published fixture run |
 | Model / vulnerability accuracy | **NOT_MEASURED** |
 | Production token savings | **NOT_MEASURED** |
 
@@ -38,40 +39,33 @@ bash scripts/public_test.sh
 .venv/bin/python3 scripts/benchmark_offline.py
 ```
 
-### 2) Integrated live smoke (completed; do not mutate)
+### 2) Published live smoke (immutable runtime proof)
 
-Directory: `evidence/live/20260903T070111Z/`  
-Files `golden_path.json`, `golden_path_repeat.json`, `*.exit`, `*.stderr`, original `release-manifest.json`, and `notes/runtime-proof-20260903.md` are **immutable**.
+Directory: `evidence/live/20260903T075935Z/`
+Treat as **runtime / fail-closed proof**, not Tavily quality.
 
-Independent review: `evidence/reviews/runtime-proof-20260903.md`.
+Older local leftover `evidence/live/20260903T070111Z/` is **not** for commit.
 
-Future manifests (new dirs only) must use corrected `scripts/build_evidence_manifest.py`:
+Independent review of citation fail: `evidence/reviews/runtime-proof-20260903.md`.
 
-- `command_argv` array;
-- `runs[]` + `run_count`;
-- `citation_relevance`;
-- `evidence_sha256` excludes `release-manifest*.json`, `manifest_stdout.json`, `*.sha256`;
-- sidecar `release-manifest.json.sha256` after final serialization;
-- fail-closed on `.env` value leakage / auth patterns / malformed JSON.
+Manifest tool: `scripts/build_evidence_manifest.py` (sidecar `.sha256`; excludes manifest files from `evidence_sha256`).
 
-### 3) Citation-relevance run (only after `GO_RUNTIME_PROOF_RELEVANCE`)
+### 3) Citation-relevance run (executed under `GO_TAVILY_RELEVANCE`)
 
-Prepared fixture: `fixtures/public_grounding_case.json`
+Fixture: `fixtures/public_grounding_case.json` (`EXECUTED_PASS`)
+Package has **no** `gatekeeper` substring.
 
 ```bash
-# DO NOT RUN without GO_RUNTIME_PROOF_RELEVANCE
 set -a; source .env; set +a
 export PYTHONPATH=src
 .venv/bin/python3 -m gatekeeper.triage \
   --package android.webkit.WebView \
   --mechanism "addJavascriptInterface with untrusted web content" \
-  --static-notes "Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding; not tied to any unpublished bounty target." \
+  --static-notes "Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding." \
   --tavily-mode required
 ```
 
-Acceptance (from fixture): ≥2/3 citations discuss WebView/`addJavascriptInterface` security; ≥1 authoritative docs domain; ≥2 unique domains; reject generic Gatekeeper/Kubernetes pages.
-
-Query builder note: current `ground_candidate` template is **plausible** for this case; no silent Tavily rewrite in the corrections task.
+Acceptance met: 3/3 citations discuss WebView/`addJavascriptInterface` security; includes `developer.android.com`; 3 unique domains; no Gatekeeper/Kubernetes collision. Query builder **unchanged**.
 
 ### 4) Practical impact (routing only)
 
@@ -82,13 +76,12 @@ Offline `cloud_calls_avoided` is a **routing** metric. Production token savings 
 - Never print `.env` values, Bearer headers, or API keys.
 - On secret detection, report **filename + key name only**.
 
-## Demo
+## Demo / Devpost
 
-New ≤2:30 terminal demo only after `GO_DEMO_RECORD`. Do not replace `_nyPil6cb_g` without GO.
+- New ≤3 min terminal demo only after `GO_DEMO_RECORD` (show live JSON, not only `BLOCKED_INFRA`).
+- Devpost track/links only after `GO_DEVPOST_UPDATE`. **Do not click Submit** (already disabled).
 
 ## Next GOs
 
-1. Independent review of this corrections pack  
-2. `GO_RUNTIME_PROOF_RELEVANCE`  
-3. Evidence pack commit/push (after relevance PASS)  
-4. `GO_DEMO_RECORD` → `GO_DEMO_PUBLISH` → `GO_DEVPOST_UPDATE`
+1. `GO_DEMO_RECORD` → `GO_DEMO_PUBLISH`
+2. `GO_DEVPOST_UPDATE`

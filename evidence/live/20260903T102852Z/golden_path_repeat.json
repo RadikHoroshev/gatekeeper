@@ -1,0 +1,44 @@
+{
+  "verdict": "PARK",
+  "reason": "The mechanism uses addJavascriptInterface with untrusted web content, which exposes native Java objects to JavaScript and can lead to code injection, XSS, or remote code execution per Android documentation.",
+  "finding": false,
+  "gate": "GO_CONTRACT",
+  "park_class": null,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "provider": "nebius-token-factory",
+  "summary": "Citations indicate that addJavascriptInterface should only be used when all HTML is trusted; loading untrusted content allows attackers to invoke bound methods, creating a security risk. Hence the candidate must be parked.",
+  "recommendation": "The mechanism uses addJavascriptInterface with untrusted web content, which exposes native Java objects to JavaScript and can lead to code injection, XSS, or remote code execution per Android documentation.",
+  "citations": [
+    {
+      "title": "Android WebView addJavascriptInterface Security Risks | PTKD Journal",
+      "url": "https://ptkd.com/journal/android-webview-javascriptinterface-security",
+      "snippet": "addJavascriptInterface bridges JavaScript to a native object, and its risk depends on your API level and what content the WebView loads. Per the Android WebView reference, apps targeting API 17 and above only expose methods marked @JavascriptInterface, which closed the original reflection-to-RCE exploit (CVE-2012-6636) that affected older versions. The remaining risk is that any exposed method is callable by whatever JavaScript runs, so a WebView that loads untrusted or interceptable content ..."
+    },
+    {
+      "title": "WebView \u2013 Native bridges \u00a0|\u00a0 Security \u00a0|\u00a0 Android Developers",
+      "url": "https://developer.android.com/privacy-and-security/risks/insecure-webview-native-bridges",
+      "snippet": "WebView implements basic functionalities of a browser, such as page rendering,\nnavigation, and JavaScript execution. WebView can be used inside an application\nto display web content as part of an activity layout. Implementing a native\nbridge within a WebView using the `addJavascriptInterface` method can create\nsecurity issues such as cross-site scripting (XSS), or allow attackers to load\nuntrusted content through interface injection and manipulate the host [...] `addJavascriptInterface`\n\n### ..."
+    },
+    {
+      "title": "Android JavascriptInterface Security?",
+      "url": "https://stackoverflow.com/questions/6415882/android-javascriptinterface-security",
+      "snippet": "allows JavaScript to control your application. This can be a very useful feature or a dangerous security issue. When the HTML in the WebView is untrustworthy (for example, part or all of the HTML is provided by some person or process), then an attacker could inject HTML that will execute your code and possibly any code of the attacker's choosing.Do not use addJavascriptInterface() unless all of the HTML in this WebView was written by you. The Java object that is bound runs in another thread [..."
+    }
+  ],
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "nemotron": "completed",
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 478,
+    "nemotron": 1776,
+    "total": 2540
+  },
+  "usage": {
+    "prompt_tokens": 1151,
+    "completion_tokens": 347,
+    "total_tokens": 1498
+  },
+  "request_id": "chatcmpl-7e65c795430e49fb8f925879090a1a14",
+  "ts": "2026-09-03T10:29:00.985262+00:00"
+}
