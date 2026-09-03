@@ -1,0 +1,44 @@
+{
+  "verdict": "PARK",
+  "reason": "The evidence is a synthetic demo fixture with no actual vulnerability; the mechanism is not a real finding.",
+  "finding": false,
+  "gate": "GO_CONTRACT",
+  "park_class": null,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "provider": "nebius-token-factory",
+  "summary": "Synthetic judge demo; no actionable security issue detected.",
+  "recommendation": "The evidence is a synthetic demo fixture with no actual vulnerability; the mechanism is not a real finding.",
+  "citations": [
+    {
+      "title": "Gatekeeper",
+      "url": "https://source.android.com/docs/security/features/authentication/gatekeeper",
+      "snippet": "Last updated 2026-06-17 UTC.\n\n### Build\n\n### Connect\n\n### Get help [...] Android Open Source Project\nAndroid Open Source Project\n\nEffective in 2026, to align with our trunk stable development model and ensure platform stability for the ecosystem, we will publish source code to AOSP in Q2 and Q4. For building and contributing to AOSP, use `android-latest-release`. The `android-latest-release` manifest branch will always reference the most recent release pushed to AOSP. For more information, se..."
+    },
+    {
+      "title": "Apply custom Pod-level security policies using Gatekeeper",
+      "url": "https://docs.cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies-with-gatekeeper",
+      "snippet": "## What's next\n\nGatekeeper provides an incredibly powerful means to enforce and validate security on GKE clusters using declarative policies. Gatekeeper's use extends beyond security however, and can be used in other aspects of administration and operations.\n\n How to use Gatekeeper\n Gatekeeper demonstrations\n Gatekeeper examples [...] Except as otherwise noted, the content of this page is licensed under the Creative Commons Attribution 4.0 License, and code samples are licensed under the Apac..."
+    },
+    {
+      "title": "What's New in Android Security and Privacy in 2026 - Google Blog",
+      "url": "https://blog.google/security/whats-new-in-android-security-privacy-2026",
+      "snippet": "We\u2019re always strengthening and growing Android\u2019s industry-leading, AI-powered protections and advanced safeguards to ensure that every user is shielded from the evolving landscape of threats. As we look ahead at the rest of 2026, our focus is on scaling these intelligent defenses to be even more seamless and powerful.\n\n## Enhancing our protections for banking scam calls [...] ## Enhancing AI security and privacy\n\nPrivate Compute Core (PCC) and Private AI Compute continue to be our way of secu..."
+    }
+  ],
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "nemotron": "completed",
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 496,
+    "nemotron": 1626,
+    "total": 2418
+  },
+  "usage": {
+    "prompt_tokens": 1143,
+    "completion_tokens": 248,
+    "total_tokens": 1391
+  },
+  "request_id": "chatcmpl-4da9e1a72b30488d9401ce512af534c4",
+  "ts": "2026-09-03T07:59:44.049897+00:00"
+}

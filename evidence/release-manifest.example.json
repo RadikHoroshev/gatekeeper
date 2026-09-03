@@ -1,0 +1,41 @@
+{
+  "artifact_type": "runtime_smoke",
+  "source_git_sha": "92a491f54a991952d932b0c14e987077be0f8913",
+  "git_sha": "92a491f54a991952d932b0c14e987077be0f8913",
+  "utc_timestamp": "2026-09-03T00:00:00Z",
+  "command_argv": [
+    ".venv/bin/python3",
+    "-m",
+    "gatekeeper.triage",
+    "--package",
+    "com.example.synthetic.gatekeeper.demo",
+    "--mechanism",
+    "SEND-extra-to-privileged-persist",
+    "--static-notes",
+    "Synthetic judge demo; not a finding; public fixture only.",
+    "--tavily-mode",
+    "required"
+  ],
+  "run_count": 0,
+  "runs": [],
+  "exit_code": null,
+  "provider": null,
+  "model": null,
+  "request_id": null,
+  "usage": null,
+  "latency_ms": null,
+  "tavily": null,
+  "tavily_hits": null,
+  "verdict": null,
+  "citation_relevance": "NOT_MEASURED",
+  "evidence_sha256": {},
+  "ci_url": "https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243",
+  "demo_url": "https://youtu.be/_nyPil6cb_g",
+  "redactions": [],
+  "limitations": [
+    "EXAMPLE SCHEMA ONLY — not a live run; do not treat as proof",
+    "Replace with a real release-manifest.json + .sha256 sidecar from scripts/build_evidence_manifest.py",
+    "demo_url shows BLOCKED_INFRA fail-closed, not live Nemotron"
+  ],
+  "metric_scope_note": "Runtime smoke proves plumbing. Citation relevance and model accuracy are separate claims."
+}

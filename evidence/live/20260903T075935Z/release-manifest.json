@@ -1,0 +1,106 @@
+{
+  "artifact_type": "runtime_smoke",
+  "source_git_sha": "92a491f54a991952d932b0c14e987077be0f8913",
+  "git_sha": "92a491f54a991952d932b0c14e987077be0f8913",
+  "utc_timestamp": "2026-09-03T07:59:44Z",
+  "command_argv": [
+    ".venv/bin/python3",
+    "-m",
+    "gatekeeper.triage",
+    "--package",
+    "com.example.synthetic.gatekeeper.demo",
+    "--mechanism",
+    "SEND-extra-to-privileged-persist",
+    "--static-notes",
+    "Synthetic judge demo; not a finding; public fixture only.",
+    "--tavily-mode",
+    "required"
+  ],
+  "command": ".venv/bin/python3 -m gatekeeper.triage --package com.example.synthetic.gatekeeper.demo --mechanism SEND-extra-to-privileged-persist --static-notes Synthetic judge demo; not a finding; public fixture only. --tavily-mode required",
+  "run_count": 2,
+  "runs": [
+    {
+      "label": "golden_path",
+      "verdict": "PARK",
+      "provider": "nebius-token-factory",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tavily": "grounded",
+      "tavily_hits": 3,
+      "citation_count": 3,
+      "usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 270,
+        "total_tokens": 1413
+      },
+      "request_id": "chatcmpl-7014068622da45ad9aae524b88d1a382",
+      "latency_ms": {
+        "gates": 0,
+        "tavily": 2492,
+        "nemotron": 2099,
+        "total": 5310
+      },
+      "exit_code": 0,
+      "finding": false,
+      "nemotron": "completed"
+    },
+    {
+      "label": "golden_path_repeat",
+      "verdict": "PARK",
+      "provider": "nebius-token-factory",
+      "model": "nvidia/nemotron-3-super-120b-a12b",
+      "tavily": "grounded",
+      "tavily_hits": 3,
+      "citation_count": 3,
+      "usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 248,
+        "total_tokens": 1391
+      },
+      "request_id": "chatcmpl-4da9e1a72b30488d9401ce512af534c4",
+      "latency_ms": {
+        "gates": 0,
+        "tavily": 496,
+        "nemotron": 1626,
+        "total": 2418
+      },
+      "exit_code": 0,
+      "finding": false,
+      "nemotron": "completed"
+    }
+  ],
+  "exit_code": 0,
+  "provider": "nebius-token-factory",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "request_id": "chatcmpl-7014068622da45ad9aae524b88d1a382",
+  "usage": {
+    "prompt_tokens": 1143,
+    "completion_tokens": 270,
+    "total_tokens": 1413
+  },
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 2492,
+    "nemotron": 2099,
+    "total": 5310
+  },
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "verdict": "PARK",
+  "citation_relevance": "FAILED_MANUAL_REVIEW",
+  "evidence_sha256": {
+    "golden_path.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path.json": "536fadb114282a0260d661c3ba284f69cabeaaa61d1b6ccfe409b2fc9410ca10",
+    "golden_path.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "golden_path_repeat.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path_repeat.json": "5b2902f7575f304a80e5e93c1813de3d88e23398c778d5121d85bcf0a158cac8",
+    "golden_path_repeat.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "ci_url": "https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243",
+  "demo_url": "https://youtu.be/_nyPil6cb_g",
+  "redactions": [],
+  "limitations": [
+    "synthetic package; retrieved citations not mechanism-relevant (see evidence/reviews)",
+    "demo_url is fail-closed video, not this live run"
+  ],
+  "metric_scope_note": "Runtime smoke proves plumbing and fail-closed behavior. Citation relevance and model/vulnerability accuracy are separate claims."
+}

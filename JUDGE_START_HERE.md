@@ -33,7 +33,7 @@ No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKE
 |---|---|
 | Source | https://github.com/RadikHoroshev/gatekeeper |
 | Public test workflow (latest runs) | https://github.com/RadikHoroshev/gatekeeper/actions/workflows/public-test.yml |
-| Unittest-in-CI run (`7781d17`) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33622587681 |
+| Public tip CI (`92a491f`) | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243 |
 | Demo video (gates / `BLOCKED_INFRA`, not live Nemotron) | https://youtu.be/_nyPil6cb_g |
 
 ## 6. Honest limitation

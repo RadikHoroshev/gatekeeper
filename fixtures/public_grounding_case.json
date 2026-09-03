@@ -1,0 +1,52 @@
+{
+  "id": "public-webview-addjavascriptinterface",
+  "status": "PREPARED_NOT_EXECUTED",
+  "synthetic": true,
+  "finding": false,
+  "confidential_bounty_data": false,
+  "package": "android.webkit.WebView",
+  "mechanism": "addJavascriptInterface with untrusted web content",
+  "static_notes": "Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding; not tied to any unpublished bounty target.",
+  "tavily_mode": "required",
+  "command_argv": [
+    ".venv/bin/python3",
+    "-m",
+    "gatekeeper.triage",
+    "--package",
+    "android.webkit.WebView",
+    "--mechanism",
+    "addJavascriptInterface with untrusted web content",
+    "--static-notes",
+    "Public Android documentation case for citation-relevance evaluation only. Synthetic/public; not a vulnerability finding; not tied to any unpublished bounty target.",
+    "--tavily-mode",
+    "required"
+  ],
+  "expected_topic_anchors": [
+    "WebView",
+    "addJavascriptInterface",
+    "JavaScript interface",
+    "untrusted web content",
+    "Android security"
+  ],
+  "preferred_authoritative_domains": [
+    "developer.android.com",
+    "source.android.com"
+  ],
+  "relevance_acceptance": {
+    "min_directly_supporting_citations": 2,
+    "of_top_n": 3,
+    "require_authoritative_primary_or_docs": true,
+    "min_unique_domains": 2,
+    "reject_generic_gatekeeper_or_kubernetes": true,
+    "notes": "A citation directly supports the mechanism if it discusses WebView and/or addJavascriptInterface security risks or mitigations. Generic Gatekeeper/OPA/Kubernetes policy pages fail."
+  },
+  "current_query_builder": {
+    "function": "gatekeeper.tavily.ground_candidate",
+    "template": "{package} {mechanism} android security named hypothesis",
+    "example_query": "android.webkit.WebView addJavascriptInterface with untrusted web content android security named hypothesis",
+    "plausible_without_rewrite": true,
+    "proposed_correction": null,
+    "note": "Current construction is plausible for developer.android.com WebView / addJavascriptInterface docs. Do not expand into a Tavily rewrite in this task."
+  },
+  "execute_only_with_go": "GO_RUNTIME_PROOF_RELEVANCE"
+}
