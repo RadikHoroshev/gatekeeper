@@ -2,8 +2,8 @@
 
 **Prepared:** 2026-09-03
 **Project:** Gatekeeper (`RadikHoroshev/gatekeeper`)
-**Public tip:** [`7887a8b`](https://github.com/RadikHoroshev/gatekeeper/commit/7887a8b3c576a14f25c2953e290ab03d7b848763)
-**CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786 (**SUCCESS**)
+**Public tip:** [`bcbbbc1`](https://github.com/RadikHoroshev/gatekeeper/commit/bcbbbc1b642e69a420d03c347202027bc5f58977)
+**CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 (**SUCCESS**)
 
 Official track blurbs (Devpost rules):
 
@@ -26,7 +26,7 @@ Official track blurbs (Devpost rules):
 | Dimension | Assessment |
 |---|---|
 | Fit to official description | **Strong.** Operators can run: local refuse → optional Tavily → Nemotron on Token Factory. |
-| Features that exist | CLI; Nemotron Super 120B via Token Factory; Tavily runtime call; offline CI; live golden-path JSON on tip `7887a8b`; routing benchmark. |
+| Features that exist | CLI; Nemotron Super 120B via Token Factory; Tavily runtime call; offline CI; live golden-path JSON on tip `bcbbbc1`; routing benchmark. |
 | Features only claimed / missing | Hosted Nebius Serverless Endpoint — **not required / not deployed**; new video of live JSON — needs `GO_DEMO_RECORD`. Tavily citation relevance — **PASS** on WebView fixture `20260903T102852Z`. |
 | Required extra work | Relevance live run; optional new demo; Devpost link refresh (`GO_DEVPOST_UPDATE`). |
 | Stage One pass/fail risk | **Lower** for Apps track if judges accept plumbing + CI + honest limits. |

@@ -1,16 +1,16 @@
 # Live evidence runbook — Gatekeeper
 
-**Runtime smoke (in tip `7887a8b`):** `evidence/live/20260903T075935Z/` — citation relevance **FAIL** (0/3 name collision).
+**Runtime smoke (immutable path; still in tip):** `evidence/live/20260903T075935Z/` — citation relevance **FAIL** (0/3 name collision).
 **Citation-relevance live (`GO_TAVILY_RELEVANCE`):** `evidence/live/20260903T102852Z/` — **PASS** (3/3 WebView / `addJavascriptInterface`).
 **Review:** `evidence/reviews/tavily-relevance-20260903.md`
 **Do not** record/publish video without `GO_DEMO_RECORD` / `GO_DEMO_PUBLISH`.
 
-## Frozen git facts (parent at relevance run)
+## Frozen git facts
 
 | Ref | Value |
 |---|---|
-| HEAD / origin/main (at run) | `7887a8b3c576a14f25c2953e290ab03d7b848763` |
-| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786 |
+| HEAD / origin/main | `bcbbbc1b642e69a420d03c347202027bc5f58977` |
+| CI | https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 |
 
 ## Confirmed vs open
 

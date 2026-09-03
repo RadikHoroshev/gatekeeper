@@ -1,8 +1,8 @@
 # Judging evidence matrix — Gatekeeper
 
 **As of:** 2026-09-03 (Phase B Tavily relevance)
-**Public tip (parent at run):** [`7887a8b`](https://github.com/RadikHoroshev/gatekeeper/commit/7887a8b3c576a14f25c2953e290ab03d7b848763)
-**CI (parent):** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33732710786 (**SUCCESS**)
+**Public tip:** [`bcbbbc1`](https://github.com/RadikHoroshev/gatekeeper/commit/bcbbbc1b642e69a420d03c347202027bc5f58977)
+**CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33744965150 (**SUCCESS**)
 **Runtime smoke:** `evidence/live/20260903T075935Z/`
 **Citation-relevance live:** `evidence/live/20260903T102852Z/`
 **Canonical video:** https://youtu.be/_nyPil6cb_g (gates / `BLOCKED_INFRA` — **not** live Nemotron)
@@ -24,7 +24,7 @@ Status legend: `CONFIRMED` | `PARTIAL` | `NOT_MEASURED` | `MISSING` | `OPEN`
 | Quality of the Idea | Refusal-first bounty agent | docs | README | — | `CONFIRMED` (idea) | — | avoid overclaim |
 | Model / vulnerability accuracy | Nemotron detects real vulns | — | — | — | `NOT_MEASURED` | never claim from smoke | — |
 | Production token savings | Real hunt token reduction | — | — | — | `NOT_MEASURED` | — | — |
-| Reproducibility | Exact SHA + CI + offline cmd | scripts | Actions + live paths | tip | `CONFIRMED` | pin tip SHA after Phase B push | keep docs honest |
+| Reproducibility | Exact SHA + CI + offline cmd | scripts | Actions + live paths | tip | `CONFIRMED` | tip pinned post Phase B | keep docs honest |
 | Submission compliance | Honest claims; no secrets | redaction tools | submitted portal; Submit disabled | secret_scan PASS | `PARTIAL` | Track + link refresh | `GO_DEVPOST_UPDATE` |
 
 ## Explicit non-claims
