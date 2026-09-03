@@ -204,15 +204,17 @@ def build_manifest(
     limitations: list[str],
     citation_relevance: str,
     artifact_type: str = "runtime_smoke",
+    env_values: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     if not GIT_SHA_RE.match(git_sha):
         raise ValueError("invalid_git_sha")
 
-    env_values = load_dotenv_values(outdir.parents[1] / ".env") if (outdir.parents[1] / ".env").exists() else {}
-    # Prefer repo-root .env next to scripts parent (gatekeeper/.env)
-    gk_env = Path(__file__).resolve().parents[1] / ".env"
-    if gk_env.is_file():
-        env_values = load_dotenv_values(gk_env)
+    if env_values is None:
+        env_values = load_dotenv_values(outdir.parents[1] / ".env") if (outdir.parents[1] / ".env").exists() else {}
+        # Prefer repo-root .env next to scripts parent (gatekeeper/.env)
+        gk_env = Path(__file__).resolve().parents[1] / ".env"
+        if gk_env.is_file():
+            env_values = load_dotenv_values(gk_env)
 
     findings = scan_for_secrets(outdir=outdir, env_values=env_values)
     if findings:

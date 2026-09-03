@@ -180,24 +180,20 @@ class EvidenceManifestTests(unittest.TestCase):
             _write_pair(out, "golden_path", {"verdict": "PARK", "x": env_secret})
             buf = io.StringIO()
             with redirect_stdout(buf):
-                with mock.patch.object(
-                    manifest,
-                    "load_dotenv_values",
-                    return_value={"NEBIUS_API_KEY": env_secret},
-                ):
-                    try:
-                        manifest.build_manifest(
-                            git_sha=FULL_SHA,
-                            outdir=out,
-                            command_argv=["python3", "-m", "gatekeeper.triage"],
-                            ci_url=None,
-                            demo_url=None,
-                            limitations=[],
-                            citation_relevance="NOT_MEASURED",
-                        )
-                        self.fail("expected RuntimeError")
-                    except RuntimeError as exc:
-                        self.assertEqual(str(exc), "secret_in_evidence")
+                try:
+                    manifest.build_manifest(
+                        git_sha=FULL_SHA,
+                        outdir=out,
+                        command_argv=["python3", "-m", "gatekeeper.triage"],
+                        ci_url=None,
+                        demo_url=None,
+                        limitations=[],
+                        citation_relevance="NOT_MEASURED",
+                        env_values={"NEBIUS_API_KEY": env_secret},
+                    )
+                    self.fail("expected RuntimeError")
+                except RuntimeError as exc:
+                    self.assertEqual(str(exc), "secret_in_evidence")
             printed = buf.getvalue()
             self.assertNotIn(env_secret, printed)
             self.assertIn("NEBIUS_API_KEY", printed)
