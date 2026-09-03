@@ -25,7 +25,7 @@ Status legend: `CONFIRMED` | `PARTIAL` | `NOT_MEASURED` | `MISSING` | `OPEN`
 | Model / vulnerability accuracy | Nemotron detects real vulns | — | — | — | `NOT_MEASURED` | never claim from smoke | — |
 | Production token savings | Real hunt token reduction | — | — | — | `NOT_MEASURED` | — | — |
 | Reproducibility | Exact SHA + CI + offline cmd | scripts | Actions + live paths | tip | `CONFIRMED` | tip pinned post Phase B | keep docs honest |
-| Submission compliance | Honest claims; no secrets | redaction tools | submitted portal; Submit disabled | secret_scan PASS | `PARTIAL` | Track + link refresh | `GO_DEVPOST_UPDATE` |
+| Submission compliance | Honest claims; no secrets | redaction tools | submitted portal; track Best apps; tip CI | secret_scan PASS | `CONFIRMED` (Save 2026-09-03) | optional new demo video | `GO_DEMO_RECORD` |
 
 ## Explicit non-claims
 

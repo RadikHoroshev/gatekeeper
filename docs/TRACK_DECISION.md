@@ -1,4 +1,4 @@
-# Track decision — Gatekeeper (human decision only; do not change Devpost)
+# Track decision — Gatekeeper
 
 **Prepared:** 2026-09-03
 **Project:** Gatekeeper (`RadikHoroshev/gatekeeper`)
@@ -28,7 +28,7 @@ Official track blurbs (Devpost rules):
 | Fit to official description | **Strong.** Operators can run: local refuse → optional Tavily → Nemotron on Token Factory. |
 | Features that exist | CLI; Nemotron Super 120B via Token Factory; Tavily runtime call; offline CI; live golden-path JSON on tip `bcbbbc1`; routing benchmark. |
 | Features only claimed / missing | Hosted Nebius Serverless Endpoint — **not required / not deployed**; new video of live JSON — needs `GO_DEMO_RECORD`. Tavily citation relevance — **PASS** on WebView fixture `20260903T102852Z`. |
-| Required extra work | Relevance live run; optional new demo; Devpost link refresh (`GO_DEVPOST_UPDATE`). |
+| Required extra work | Optional new demo video (`GO_DEMO_RECORD`). Devpost Save done 2026-09-03. |
 | Stage One pass/fail risk | **Lower** for Apps track if judges accept plumbing + CI + honest limits. |
 | Recommendation | **Recommend Best Apps and Agents.** |
 
@@ -39,5 +39,7 @@ Gatekeeper has reusable skills + privacy boundary, but **lacks** measured persis
 
 ## Human action (not performed here)
 
-- Devpost track field: leave unchanged until `GO_DEVPOST_UPDATE`.
-- This file is advisory only — no portal Save/Submit.
+- Devpost track field: updated 2026-09-03 under `GO_DEVPOST_UPDATE` → **Best apps and agents** (Save/re-submit; Submit not newly clicked).
+- Working demo / test-build URL: Actions run `33745097096` (tip `78011f7`).
+- Video remains `_nyPil6cb_g` (fail-closed); live Token Factory proof is tip JSON.
+- This file remains advisory for humans; portal fields are source of truth after Save.

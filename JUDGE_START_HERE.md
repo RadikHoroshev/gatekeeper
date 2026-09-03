@@ -43,7 +43,7 @@ No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKE
 
 ## 6. Track recommendation
 
-Prefer **Best Apps and Agents**. Personal AI (persistent memory + always-on) is **not demonstrated**. See `docs/TRACK_DECISION.md`. Devpost track is unchanged until a separate `GO_DEVPOST_UPDATE`.
+Prefer **Best Apps and Agents**. Personal AI (persistent memory + always-on) is **not demonstrated**. See `docs/TRACK_DECISION.md`. Devpost track updated under `GO_DEVPOST_UPDATE` to **Best apps and agents** (Save/re-submit update; Submit not newly clicked).
 
 ## 7. Honest limitation (video)
 
