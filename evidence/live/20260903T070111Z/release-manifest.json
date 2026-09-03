@@ -1,0 +1,42 @@
+{
+  "git_sha": "92a491f54a991952d932b0c14e987077be0f8913",
+  "utc_timestamp": "2026-09-03T07:01:34Z",
+  "command": "python3 -m gatekeeper.triage --package com.example.synthetic.gatekeeper.demo --mechanism SEND-extra-to-privileged-persist --tavily-mode required",
+  "exit_code": 0,
+  "provider": "nebius-token-factory",
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "request_id": "chatcmpl-183cb34af09e499ba875f3f45a150e99",
+  "usage": {
+    "prompt_tokens": 1136,
+    "completion_tokens": 293,
+    "total_tokens": 1429
+  },
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 2591,
+    "nemotron": 1987,
+    "total": 4901
+  },
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "verdict": "PARK",
+  "ci_url": "https://github.com/RadikHoroshev/gatekeeper/actions/runs/33725567243",
+  "demo_url": "https://youtu.be/_nyPil6cb_g",
+  "redactions": [],
+  "limitations": [
+    "synthetic package only; not a finding",
+    "demo_url is fail-closed video, not this live run",
+    "F5 live injection not authorized in this GO"
+  ],
+  "metric_scope_note": "Live fields may be null until GO_RUNTIME_PROOF; do not invent IDs or usage.",
+  "evidence_sha256": {
+    "golden_path.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path.json": "7f10fe4666b01b0cf6cf096e9fa03bb1ee6dd5e74bc8223468cfc0f0ed97bd08",
+    "golden_path.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "golden_path_repeat.exit": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "golden_path_repeat.json": "a8cb92697cd78336a2788a7b7704139ffe1fb5e8e51fb89c4c59fe384186b5c0",
+    "golden_path_repeat.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "manifest_stdout.json": "796a9e64d328ab853fc82f1542d0f928d226b07184c17d07f823787d12d9b945"
+  },
+  "manifest_sha256": "4d9ca06f2115dc5c4d1975bbf169f5392b7f0c32da4be805c6328856b3912934"
+}

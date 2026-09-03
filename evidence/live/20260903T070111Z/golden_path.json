@@ -1,0 +1,44 @@
+{
+  "verdict": "PARK",
+  "reason": "The evidence is a synthetic demo fixture explicitly marked as not a finding; there is no actual vulnerability to investigate.",
+  "finding": false,
+  "gate": "GO_CONTRACT",
+  "park_class": null,
+  "model": "nvidia/nemotron-3-super-120b-a12b",
+  "provider": "nebius-token-factory",
+  "summary": "Mechanism SEND-extra-to-privileged-persist in package com.example.synthetic.gatekeeper.demo is a synthetic judge demo with no real security issue.",
+  "recommendation": "The evidence is a synthetic demo fixture explicitly marked as not a finding; there is no actual vulnerability to investigate.",
+  "citations": [
+    {
+      "title": "Apply custom Pod-level security policies using Gatekeeper \u00a0|\u00a0 GKE security \u00a0|\u00a0 Google Cloud Documentation",
+      "url": "https://docs.cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies-with-gatekeeper",
+      "snippet": "For example, you might have a constraint that declares allowable seccomp profiles that can be applied to Pods in a specific namespace, and a comparable constraint template that provides the logic for extracting these values and handling enforcement.\n\nThe following constraint template, from the Gatekeeper repository, checks for the existence of `securityContext.privileged` in a Pod specification: [...] To extend the previous constraint template example, the following constraint defines the sco..."
+    },
+    {
+      "title": "Zimperium",
+      "url": "https://zimperium.com/blog",
+      "snippet": "May 19, 2026\n\nThe FBI warns of rising mobile security threats, including smishing and malicious apps, as cybercriminals target sensitive data and personal systems. Booking.com Breach Reveals How Smishing Attacks Are Created\n\n### Booking.com Breach Reveals How Smishing Attacks Are Created\n\nMay 18, 2026 [...] May 18, 2026\n\nBooking.com breach highlights how attackers leverage stolen data to create convincing smishing campaigns targeting mobile users for credential theft. BYOD Programs Increase M..."
+    },
+    {
+      "title": "Gatekeeper \u00a0|\u00a0 Android Open Source Project",
+      "url": "https://source.android.com/docs/security/features/authentication/gatekeeper",
+      "snippet": "Trusty uses an internal IPC system to communicate a shared secret directly\nbetween KeyMint (previously Keymaster) and the Trusty implementation of Gatekeeper (the Trusty\nGatekeeper). This shared secret is used for signing AuthTokens sent to\nKeystore to provide attestations of password verification. Trusty Gatekeeper\nrequests the key from KeyMint for each use and does not persist or cache the\nvalue. Implementations are free to share this secret in any way that does not\ncompromise security. [....."
+    }
+  ],
+  "tavily": "grounded",
+  "tavily_hits": 3,
+  "nemotron": "completed",
+  "latency_ms": {
+    "gates": 0,
+    "tavily": 2591,
+    "nemotron": 1987,
+    "total": 4901
+  },
+  "usage": {
+    "prompt_tokens": 1136,
+    "completion_tokens": 293,
+    "total_tokens": 1429
+  },
+  "request_id": "chatcmpl-183cb34af09e499ba875f3f45a150e99",
+  "ts": "2026-09-03T07:01:16.752431+00:00"
+}

@@ -8,3 +8,8 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+# Machine-specific Devpost access tooling / local evidence (not for public repo)
+DEVPOST_ACCESS.md
+docs/demo/
+scripts/load-devpost-env.sh
+scripts/sync-devpost-settings.py
