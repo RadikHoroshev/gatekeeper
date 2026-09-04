@@ -38,7 +38,8 @@ No secrets required. Expect unittest OK, `ALLOW_STATIC`, `PARK_INSTANT`, `BLOCKE
 | Collision FAIL JSON | [`evidence/live/20260903T075935Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/52d282158d894f89d3766a2658107d6416a66523/evidence/live/20260903T075935Z/golden_path.json) |
 | Relevance PASS JSON (WebView) | [`evidence/live/20260903T102852Z/golden_path.json`](https://github.com/RadikHoroshev/gatekeeper/blob/52d282158d894f89d3766a2658107d6416a66523/evidence/live/20260903T102852Z/golden_path.json) |
 | Relevance review | `evidence/reviews/tavily-relevance-20260903.md` |
-| Demo video (gates / `BLOCKED_INFRA` only) | https://youtu.be/_nyPil6cb_g |
+| Demo video (live 2026-09-04, Public) | https://youtu.be/WdnZCNe81LY |
+| Archive fail-closed clip (not Devpost) | https://youtu.be/_nyPil6cb_g |
 
 **How to read the live JSON:** `075935Z` / `070111Z` prove **runtime plumbing** and **document a real Tavily error**: citations collided on the word “Gatekeeper” (AOSP/GKE) — **0/3** mechanism-relevant. `102852Z` is the **citation-relevance** correction: `android.webkit.WebView` / `addJavascriptInterface` — **3/3** supporting, including `developer.android.com`. Full falsification table: `docs/REVIEWER_PACKET.md`.
 
@@ -48,7 +49,7 @@ Prefer **Best Apps and Agents**. Personal AI (persistent memory + always-on) is 
 
 ## 7. Honest limitation (video)
 
-The published video shows `BLOCKED_INFRA` when keys are unset. It demonstrates fail-closed discipline, **not** a live Nemotron response on camera. Live Token Factory evidence is the JSON above.
+Canonical Devpost video is https://youtu.be/WdnZCNe81LY (1:18, Public, 2026-09-04): Instant PARK → named `ALLOW_STATIC` → live WebView `--tavily-mode required` with Tavily 3/3 (includes `developer.android.com`) and Nemotron Super 120B on Token Factory. On-camera live JSON is `finding=false` / `PARK` — a real model call, not a vuln. Archive `_nyPil6cb_g` remains fail-closed `BLOCKED_INFRA` only; do not treat it as the current embed.
 
 ## 8. Judging criteria map
 

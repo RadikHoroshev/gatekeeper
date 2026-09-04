@@ -41,5 +41,5 @@ Gatekeeper has reusable skills + privacy boundary, but **lacks** measured persis
 
 - Devpost track field: updated 2026-09-03 under `GO_DEVPOST_UPDATE` → **Best apps and agents** (Save/re-submit; Submit not newly clicked).
 - Working demo / test-build URL: Actions run `33745097096` (tip `78011f7`).
-- Video remains `_nyPil6cb_g` (fail-closed); live Token Factory proof is tip JSON.
+- Video (Devpost): https://youtu.be/WdnZCNe81LY (live Public 2026-09-04). Archive fail-closed: `_nyPil6cb_g`. Live JSON remains the hashable Token Factory proof.
 - This file remains advisory for humans; portal fields are source of truth after Save.

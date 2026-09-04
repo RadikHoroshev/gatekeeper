@@ -6,7 +6,8 @@
 **Audited CI:** https://github.com/RadikHoroshev/gatekeeper/actions/runs/33781188328 (**SUCCESS**, `public-test`)
 **Devpost:** https://devpost.com/software/gatekeeper-g24e7o (submission **1163649**, status Submitted)
 **Track on portal:** Best apps and agents
-**Video:** https://youtu.be/_nyPil6cb_g — **fail-closed only** (`BLOCKED_INFRA`)
+**Video (Devpost / Public):** https://youtu.be/WdnZCNe81LY — live 2026-09-04 (PARK + ALLOW_STATIC + WebView Token Factory on camera)  
+**Archive fail-closed:** https://youtu.be/_nyPil6cb_g — `BLOCKED_INFRA` only; not the current embed
 
 This file exists so a reviewer does not have to reverse-engineer three live directories. Every row below is a **claim + how to falsify it**.
 
@@ -19,7 +20,7 @@ This file exists so a reviewer does not have to reverse-engineer three live dire
 | Tavily API returned hits | **CONFIRMED** | `tavily=grounded` hits=3 in all three live dirs |
 | Tavily citations can be **wrong** (name collision) | **CONFIRMED FAIL** | `070111Z` and `075935Z` URLs are AOSP/GKE “Gatekeeper”, not the synthetic Android mechanism |
 | Tavily citations can be **right** for a named mechanism | **CONFIRMED PASS** | `102852Z` WebView / `addJavascriptInterface`, 3/3, includes `developer.android.com` |
-| Video shows live Nemotron | **FALSE** | oEmbed title is working demo; content is fail-closed. Do not treat as Token Factory camera proof |
+| Video shows live Nemotron | **CONFIRMED** on `WdnZCNe81LY` | oEmbed title “live demo”; on-camera WebView JSON `provider=nebius-token-factory`, Tavily 3/3. `finding=false`. Archive `_nyPil6cb_g` is still fail-closed only |
 | Nemotron finds real vulns | **NOT_MEASURED** | synthetic `finding=false` / `PARK` only |
 | Production token savings | **NOT_MEASURED** | offline routing metric only |
 | Personal AI (memory / always-on) | **NOT CLAIMED** | track is Best apps and agents |
@@ -101,14 +102,15 @@ Same shape on smoke JSON (`075935Z` usage `1413`).
 
 ## 6. Video honesty (expected question)
 
-oEmbed title: “Gatekeeper working demo — Hermes + NVIDIA Nemotron on Nebius Token Factory”.
-**On-camera behavior:** keys unset → `BLOCKED_INFRA`. That is fail-closed, not a live Super 120B reply. Live proof is the JSON in §2–§5.
+Canonical oEmbed: “Gatekeeper live demo — Hermes + NVIDIA Nemotron on Nebius Token Factory” (`WdnZCNe81LY`, 1:18, Public).
+**On-camera behavior:** Instant PARK → `ALLOW_STATIC` → live WebView `--tavily-mode required` with Tavily 3/3 and Nemotron Super 120B on Token Factory. JSON is `finding=false` / `PARK` — not a vuln claim. Archive `_nyPil6cb_g` is fail-closed `BLOCKED_INFRA` and is **not** the Devpost embed. Live JSON directories in §2–§5 remain the hashable Token Factory proof.
 
-## 7. Devpost (portal, 2026-09-03T17:12Z scrape after `GO_DEVPOST_UPDATE`)
+## 7. Devpost (portal)
 
 | Check | Result |
 |---|---|
-| Embed `_nyPil6cb_g` | present |
+| Embed `WdnZCNe81LY` | present (L-116 2026-09-04 after `GO_DEVPOST_VIDEO`, project v17) |
+| Old embed `_nyPil6cb_g` | **absent** on public preview |
 | Working demo / test-build | Actions **`33781962888`** (SUCCESS, tip `45eacef` reviewer packet) |
 | Writeup | Best Apps / Refuse-first / `JUDGE_START_HERE` / collision FAIL + WebView PASS |
 | `docs/REVIEWER_PACKET.md` linked | present on public page |

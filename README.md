@@ -78,7 +78,7 @@ See `BUILD.md` for Devpost registration and Builder Program.
 | Public repo + OSS license | MIT — https://github.com/RadikHoroshev/gatekeeper |
 | Public test build | GitHub Actions `public-test` — `scripts/public_test.sh` (no API key) |
 | Best Use of Tavily | Optional: `gatekeeper.tavily` after ALLOW — claim only after local `smoke_tavily.py` PASS |
-| Demo video ≤3 min | https://youtu.be/_nyPil6cb_g (`scripts/demo_candidate.sh` flow) |
+| Demo video ≤3 min | https://youtu.be/WdnZCNe81LY (live 1:18; archive fail-closed `_nyPil6cb_g`) |
 
 ## Architecture
 

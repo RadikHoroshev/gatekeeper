@@ -80,10 +80,10 @@ Offline `cloud_calls_avoided` is a **routing** metric. Production token savings 
 
 ## Demo / Devpost
 
-- New ≤3 min terminal demo only after `GO_DEMO_RECORD` (show live JSON, not only `BLOCKED_INFRA`).
-- Devpost updated 2026-09-03 under `GO_DEVPOST_UPDATE`: track **Best apps and agents**, tip CI `33745097096`, Tavily=Yes, video `_nyPil6cb_g`. **Do not click Submit** (already submitted).
+- Live demo recorded and published 2026-09-04: https://youtu.be/WdnZCNe81LY (Public, 1:18).
+- Devpost `GO_DEVPOST_VIDEO` project v17: video field only. Track **Best apps and agents**; Tavily=Yes. **Do not click Submit** (`submitted_at` 2026-09-01).
 
 ## Next GOs
 
-1. `GO_DEMO_RECORD` → `GO_DEMO_PUBLISH` (optional but strengthens Design)
-2. No Submit click
+1. No Submit click
+2. Optional: keep GitHub docs in sync with Devpost video (this pin)
